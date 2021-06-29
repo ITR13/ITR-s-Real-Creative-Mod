@@ -67,10 +67,11 @@ namespace RealCreative
 
             MelonLogger.Msg("Updating Tracer configs");
 
+            string oldToml;
             try
             {
-                var toml = File.ReadAllText(FullPath);
-                CreativeConfig = TomletMain.To<CreativeConfig>(toml);
+                oldToml = File.ReadAllText(FullPath);
+                CreativeConfig = TomletMain.To<CreativeConfig>(oldToml);
             }
             catch (Exception e)
             {
@@ -90,7 +91,10 @@ namespace RealCreative
             try
             {
                 var toml = TomletMain.TomlStringFrom(CreativeConfig.Default());
-                File.WriteAllText(FullPath, toml);
+                if (toml != oldToml)
+                {
+                    File.WriteAllText(FullPath, toml);
+                }
             }
             catch (Exception e)
             {
