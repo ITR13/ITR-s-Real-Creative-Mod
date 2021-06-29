@@ -33,6 +33,8 @@ namespace RealCreative
                 "Generate ids",
                 DataExtractor.GenerateAndSaveAndOpen
             );
+
+            _generateButton.transform.SetSiblingIndex(2);
         }
 
         private void CheckOpenSettingsButton()
@@ -43,6 +45,8 @@ namespace RealCreative
                 "Creative",
                 () => Process.Start(ConfigWatcher.FullPath)
             );
+
+            _creativeSettings.transform.SetSiblingIndex(_creativeSettings.transform.parent.childCount - 2);
         }
     }
 }
