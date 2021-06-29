@@ -87,7 +87,6 @@ namespace RealCreative
             CreativeConfig.item = FixNames(CreativeConfig.item , DataExtractor.GetItems());
             CreativeConfig.mob = FixNames(CreativeConfig.mob, DataExtractor.GetMobs());
 
-
             try
             {
                 var toml = TomletMain.TomlStringFrom(CreativeConfig.Default());

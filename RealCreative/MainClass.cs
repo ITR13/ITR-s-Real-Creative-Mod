@@ -22,6 +22,7 @@ namespace RealCreative
             if(!LocalClient.serverOwner) return;
             CheckOpenSettingsButton();
             ConfigWatcher.UpdateIfDirty();
+            InputHandler.DoInput();
         }
 
         private void CheckGenerateButton()
