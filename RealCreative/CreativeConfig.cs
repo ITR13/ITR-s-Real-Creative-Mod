@@ -39,9 +39,21 @@ namespace RealCreative
 
             config.mob[10].hold = KeyCode.LeftControl;
             config.mob[10].trigger = KeyCode.Keypad3;
-            
+
+            config.randomPowerup.Add(
+                new SpawnRandomPowerupData
+                {
+                    amount = 10,
+                    whiteWeight = 0.3f, blueWeight = 0.2f, orangeWeight = 0.1f,
+                    trigger = KeyCode.Keypad5,
+                }
+            );
+
+
             return config;
         }
+
+        public List<SpawnRandomPowerupData> randomPowerup = new List<SpawnRandomPowerupData>();
 
         public List<SpawnData>
             powerup = new List<SpawnData>(),
@@ -54,6 +66,14 @@ namespace RealCreative
     {
         public string name;
         public int id, amount;
+        public KeyCode hold, trigger;
+    }
+
+    [Serializable]
+    public class SpawnRandomPowerupData
+    {
+        public float whiteWeight, blueWeight, orangeWeight;
+        public int amount;
         public KeyCode hold, trigger;
     }
 }

@@ -11,9 +11,26 @@ namespace RealCreative
         {
             var updatePos = true;
 
-            HandleList(ConfigWatcher.CreativeConfig.powerup, Spawner.SpawnPowerup);
-            HandleList(ConfigWatcher.CreativeConfig.item, Spawner.SpawnItem);
-            HandleList(ConfigWatcher.CreativeConfig.mob, Spawner.SpawnMob);
+            var config = ConfigWatcher.CreativeConfig;
+
+            HandleList(config.powerup, Spawner.SpawnPowerup);
+            HandleList(config.item, Spawner.SpawnItem);
+            HandleList(config.mob, Spawner.SpawnMob);
+
+            foreach (var data in config.randomPowerup)
+            {
+                if (data.trigger == KeyCode.None) continue;
+                if (data.hold != KeyCode.None && !Input.GetKey(data.hold)) continue;
+                if (!Input.GetKeyDown(data.trigger)) continue;
+
+                if (updatePos)
+                {
+                    updatePos = false;
+                    Spawner.UpdateSpawnPosition();
+                }
+
+                if (!Spawner.SpawnRandomPowerup(data)) break;
+            }
 
             return;
             void HandleList(List<SpawnData> spawnDatas, Func<int, int, bool> onTrigger)

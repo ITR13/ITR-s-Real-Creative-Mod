@@ -1,4 +1,5 @@
-﻿using MelonLoader;
+﻿using System;
+using MelonLoader;
 using UnityEngine;
 
 namespace RealCreative
@@ -76,6 +77,28 @@ namespace RealCreative
             var nextId = itemManager.GetNextId();
             itemManager.DropItemAtPosition(id, quantity, _spawnPosition, nextId);
             ServerSend.DropItemAtPosition(id, quantity, nextId, _spawnPosition);
+            return true;
+        }
+
+        public static bool SpawnRandomPowerup(SpawnRandomPowerupData data)
+        {
+            var itemManager = ItemManager.Instance;
+            if (itemManager == null)
+            {
+                MelonLogger.Error("Failed to find ItemManager");
+                return false;
+            }
+
+            MelonLogger.Msg($"Spawning {data.amount} random powerups at {_spawnPosition}");
+
+            for (var i = 0; i < data.amount; i++)
+            {
+                var randomPowerup = itemManager.GetRandomPowerup(data.whiteWeight, data.blueWeight, data.orangeWeight);
+                var nextId = itemManager.GetNextId();
+                itemManager.DropPowerupAtPosition(randomPowerup.id, _spawnPosition, nextId);
+                ServerSend.DropPowerupAtPosition(randomPowerup.id, nextId, _spawnPosition);
+            }
+
             return true;
         }
     }
