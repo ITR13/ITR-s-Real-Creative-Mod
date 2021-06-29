@@ -50,7 +50,7 @@ namespace RealCreative
                 if (spawnData.hold != KeyCode.None && !Input.GetKey(spawnData.hold)) return true;
                 if (!Input.GetKeyDown(spawnData.trigger)) return true;
 
-                MelonLogger.Msg($"Spawning {spawnData.amount} * '{spawnData.name}' at {updatePos}");
+                MelonLogger.Msg($"Spawning {spawnData.amount} * '{spawnData.name}' at {Spawner.SpawnPosition}");
 
                 if (updatePos)
                 {

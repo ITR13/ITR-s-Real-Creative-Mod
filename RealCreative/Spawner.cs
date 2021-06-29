@@ -6,7 +6,7 @@ namespace RealCreative
 {
     public static class Spawner
     {
-        private static Vector3 _spawnPosition;
+        public static Vector3 SpawnPosition { get; private set; }
 
         public static void UpdateSpawnPosition()
         {
@@ -20,7 +20,7 @@ namespace RealCreative
             var screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f);
             if (!Physics.Raycast(mainCamera.ScreenPointToRay(screenCenter), out var hitInfo)) return;
 
-            _spawnPosition = hitInfo.point + hitInfo.normal * 0.3f;
+            SpawnPosition = hitInfo.point + hitInfo.normal * 0.3f;
         }
 
         public static bool SpawnMob(int id, int quantity)
@@ -42,7 +42,7 @@ namespace RealCreative
             mobSpawner.ServerSpawnNewMob(
                 mobManager.GetNextId(),
                 id,
-                _spawnPosition, 
+                SpawnPosition, 
                 quantity, quantity
             );
             return true;
@@ -59,8 +59,8 @@ namespace RealCreative
             for (var i = 0; i < quantity; i++)
             {
                 var nextId = itemManager.GetNextId();
-                itemManager.DropPowerupAtPosition(id, _spawnPosition, nextId);
-                ServerSend.DropPowerupAtPosition(id, nextId, _spawnPosition);
+                itemManager.DropPowerupAtPosition(id, SpawnPosition, nextId);
+                ServerSend.DropPowerupAtPosition(id, nextId, SpawnPosition);
             }
 
             return true;
@@ -75,8 +75,8 @@ namespace RealCreative
                 return false;
             }
             var nextId = itemManager.GetNextId();
-            itemManager.DropItemAtPosition(id, quantity, _spawnPosition, nextId);
-            ServerSend.DropItemAtPosition(id, quantity, nextId, _spawnPosition);
+            itemManager.DropItemAtPosition(id, quantity, SpawnPosition, nextId);
+            ServerSend.DropItemAtPosition(id, quantity, nextId, SpawnPosition);
             return true;
         }
 
@@ -89,14 +89,14 @@ namespace RealCreative
                 return false;
             }
 
-            MelonLogger.Msg($"Spawning {data.amount} random powerups at {_spawnPosition}");
+            MelonLogger.Msg($"Spawning {data.amount} random powerups at {SpawnPosition}");
 
             for (var i = 0; i < data.amount; i++)
             {
                 var randomPowerup = itemManager.GetRandomPowerup(data.whiteWeight, data.blueWeight, data.orangeWeight);
                 var nextId = itemManager.GetNextId();
-                itemManager.DropPowerupAtPosition(randomPowerup.id, _spawnPosition, nextId);
-                ServerSend.DropPowerupAtPosition(randomPowerup.id, nextId, _spawnPosition);
+                itemManager.DropPowerupAtPosition(randomPowerup.id, SpawnPosition, nextId);
+                ServerSend.DropPowerupAtPosition(randomPowerup.id, nextId, SpawnPosition);
             }
 
             return true;
