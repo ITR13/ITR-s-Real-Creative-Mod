@@ -27,6 +27,8 @@ namespace RealCreative
         private static readonly FileSystemWatcher FileSystemWatcher;
         private static bool _dirty = false;
 
+        private static string lastReadConfig;
+
         static ConfigWatcher()
         {
             FileSystemWatcher = new FileSystemWatcher(FileDirectory, FileName)
@@ -71,6 +73,13 @@ namespace RealCreative
             try
             {
                 oldToml = File.ReadAllText(FullPath);
+                if (lastReadConfig == oldToml)
+                {
+                    return false;
+                }
+
+                lastReadConfig = oldToml;
+
                 CreativeConfig = TomletMain.To<CreativeConfig>(oldToml);
             }
             catch (Exception e)
@@ -90,7 +99,7 @@ namespace RealCreative
 
             try
             {
-                var toml = TomletMain.TomlStringFrom(CreativeConfig.Default());
+                var toml = TomletMain.TomlStringFrom(CreativeConfig);
                 if (toml != oldToml)
                 {
                     File.WriteAllText(FullPath, toml);
