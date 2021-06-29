@@ -239,6 +239,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigWatcher.cs" />
+    <Compile Include="CreativeConfig.cs" />
     <Compile Include="DataExtractor.cs" />
     <Compile Include="MainClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

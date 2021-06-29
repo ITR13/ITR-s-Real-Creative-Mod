@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MelonLoader;
+﻿using MelonLoader;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,7 +9,7 @@ namespace RealCreative
 {
     public static class UiInjector
     {
-        public static GameObject CreateSettingsButton(string text, UnityAction onClick)
+        public static GameObject CreatePauseMenuButton(string text, UnityAction onClick)
         {
             var otherInput = OtherInput.Instance;
             if (otherInput == null) return null;
