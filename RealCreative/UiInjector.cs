@@ -67,6 +67,7 @@ namespace RealCreative
                 return false;
             }
 
+            // For some reason this doesn't work
             buttonComponent.onClick.RemoveAllListeners();
             buttonComponent.onClick.AddListener(onClick);
             return true;

@@ -1,21 +1,26 @@
-﻿using MelonLoader;
+﻿using System.Xml.Serialization;
+using MelonLoader;
 using UnityEngine;
 
 namespace RealCreative
 {
     public class MainClass : MelonMod
     {
-        private GameObject _tempTest;
+        private GameObject _generateButton;
+
         public override void OnUpdate()
         {
-            if (_tempTest != null) return;
-            _tempTest = UiInjector.CreateSettingsButton(
-                "Test",
-                () => { MelonLogger.Msg("Button was clicked"); }
-            );
+            CheckGenerateButton();
+        }
 
-            if (_tempTest == null) return;
-            MelonLogger.Msg("Created button");
+        private void CheckGenerateButton()
+        {
+            if (_generateButton != null) return;
+
+            _generateButton = UiInjector.CreateSettingsButton(
+                "Generate ids",
+                DataExtractor.GenerateAndSaveAndOpen
+            );
         }
     }
 }
