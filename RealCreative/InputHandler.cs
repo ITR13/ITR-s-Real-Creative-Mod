@@ -33,7 +33,7 @@ namespace RealCreative
             bool HandleData(SpawnData spawnData, Func<int, int, bool> onTrigger)
             {
                 if (spawnData.trigger == KeyCode.None) return true;
-                if (spawnData.hold == KeyCode.None || Input.GetKey(spawnData.hold)) return true;
+                if (spawnData.hold != KeyCode.None && !Input.GetKey(spawnData.hold)) return true;
                 if (!Input.GetKeyDown(spawnData.trigger)) return true;
 
                 MelonLogger.Msg($"Spawning {spawnData.amount} * '{spawnData.name}' at {updatePos}");
