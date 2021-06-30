@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Security.Cryptography;
 using MelonLoader;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace RealCreative
 {
@@ -51,6 +53,8 @@ namespace RealCreative
         public static bool SpawnPowerup(int id, int quantity)
         {
             var itemManager = ItemManager.Instance;
+            if (itemManager == null) itemManager = Object.FindObjectOfType<ItemManager>();
+
             if (itemManager == null)
             {
                 MelonLogger.Error("Failed to find ItemManager");
@@ -61,6 +65,23 @@ namespace RealCreative
                 var nextId = itemManager.GetNextId();
                 itemManager.DropPowerupAtPosition(id, SpawnPosition, nextId);
                 ServerSend.DropPowerupAtPosition(id, nextId, SpawnPosition);
+
+                if (quantity < 2) continue;
+                if (!itemManager.list.TryGetValue(nextId, out var go)) continue;
+                foreach (var ps in go.GetComponentsInChildren<ParticleSystem>(true))
+                {
+                    Object.Destroy(ps);
+                }
+                if (i == 0) continue;
+
+                foreach (var renderer in go.GetComponentsInChildren<Renderer>(true))
+                {
+                    renderer.enabled = false;
+                }
+                foreach (var audioSource in go.GetComponentsInChildren<AudioSource>(true))
+                {
+                    audioSource.enabled = false;
+                }
             }
 
             return true;
@@ -97,6 +118,23 @@ namespace RealCreative
                 var nextId = itemManager.GetNextId();
                 itemManager.DropPowerupAtPosition(randomPowerup.id, SpawnPosition, nextId);
                 ServerSend.DropPowerupAtPosition(randomPowerup.id, nextId, SpawnPosition);
+
+                if (data.amount < 2) continue;
+                if (!itemManager.list.TryGetValue(nextId, out var go)) continue;
+                foreach (var ps in go.GetComponentsInChildren<ParticleSystem>(true))
+                {
+                    Object.Destroy(ps);
+                }
+                if (i == 0) continue;
+
+                foreach (var renderer in go.GetComponentsInChildren<Renderer>(true))
+                {
+                    renderer.enabled = false;
+                }
+                foreach (var audioSource in go.GetComponentsInChildren<AudioSource>(true))
+                {
+                    audioSource.enabled = false;
+                }
             }
 
             return true;
