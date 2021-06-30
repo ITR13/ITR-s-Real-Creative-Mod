@@ -76,6 +76,9 @@
     <Compile Include="Spawner.cs" />
     <Compile Include="UiInjector.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.md" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /y "$(TargetPath)" "%25STEAMROOT%25\steamapps\common\Muck\Mods\"</PostBuildEvent>
