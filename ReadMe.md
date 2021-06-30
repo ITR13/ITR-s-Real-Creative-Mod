@@ -7,7 +7,7 @@ It's a mod for muck that allows you to spawn in any powerup, item, or mob at the
 
 ### Pause Menu
 If you press escape you might notice two extra buttons:
-![Pause menu with added buttons "Generate ids" and "Creative"](https://raw.githubusercontent.com/ITR13/ITR-s-Real-Creative-Mod/EscapeMenu.png)
+![Pause menu with added buttons "Generate ids" and "Creative"](https://raw.githubusercontent.com/ITR13/ITR-s-Real-Creative-Mod/main/EscapeMenu.png)
 
 ##### Generate ids 
 Use this to see the ids and names of all the powerups, mobs, and items.
