@@ -61,7 +61,7 @@ It should work in multiplayer, but I haven't tested. It will only work for the h
 ## Installing
 1. [Install the MelonLoader](https://github.com/LavaGang/MelonLoader#how-to-use-the-installer)
 2. Start Muck once and wait until it's fully loaded, then close the game
-3. [Download the latest release of `ITR's Real Creative Mod`] and put the dll in your "Mods" folder (same folder as the exe)
+3. [Download the latest release of `ItrsRealCreative.dll`](https://github.com/ITR13/ITR-s-Real-Creative-Mod/releases) and put it in your "Mods" folder (same folder as the exe)
 4. Start the game and follow "How to use"
 
 ## Other notes
